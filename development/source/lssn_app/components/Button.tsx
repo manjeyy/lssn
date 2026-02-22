@@ -1,5 +1,6 @@
 import { forwardRef } from 'react';
 import { StyleSheet, Text, TouchableOpacity, TouchableOpacityProps, View } from 'react-native';
+import { darkTheme } from '../lib/theme';
 
 type ButtonProps = {
   title?: string;
@@ -18,13 +19,13 @@ Button.displayName = 'Button';
 const styles = StyleSheet.create({
   button: {
     alignItems: 'center',
-    backgroundColor: '#6366F1',
-    borderRadius: 24,
+    backgroundColor: darkTheme.primary,
+    borderRadius: 12,
     elevation: 5,
     flexDirection: 'row',
     justifyContent: 'center',
     marginHorizontal: 16,
-    padding: 16,
+    padding: 14,
     shadowColor: '#000',
     shadowOffset: {
       height: 2,
@@ -34,7 +35,7 @@ const styles = StyleSheet.create({
     shadowRadius: 3.84,
   },
   buttonText: {
-    color: '#FFFFFF',
+    color: darkTheme.primaryForeground,
     fontSize: 16,
     fontWeight: '600',
     textAlign: 'center',
