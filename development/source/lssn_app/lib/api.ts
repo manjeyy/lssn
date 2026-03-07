@@ -18,7 +18,7 @@ type AuthResponse = {
 
 const ACCESS_KEY = 'lssn_app_access_token';
 const REFRESH_KEY = 'lssn_app_refresh_token';
-const API_BASE_URL = process.env.EXPO_PUBLIC_API_BASE_URL ?? 'http://192.168.100.28:5000';
+const API_BASE_URL = process.env.EXPO_PUBLIC_API_BASE_URL ?? 'http://192.168.100.184:5000';
 
 export function getApiBaseUrl() {
   return API_BASE_URL;
@@ -190,6 +190,14 @@ export async function reactToSlide(id: number, slideIndex: number, reaction: 'li
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ reaction }),
   });
+}
+
+export async function getTopics() {
+  return apiFetch<Array<{ id: number; name: string; slug: string }>>('/topics');
+}
+
+export async function getMyLssns() {
+  return apiFetch<any[]>('/lssns?mine=true');
 }
 
 export function resolveAssetUrl(url?: string | null) {
