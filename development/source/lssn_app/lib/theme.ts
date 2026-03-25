@@ -1,4 +1,4 @@
-// Theme system matching lssn_creator design
+
 export const lightTheme = {
   primary: '#098fc8',
   primaryForeground: '#081108',

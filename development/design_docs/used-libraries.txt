@@ -1,0 +1,62 @@
+STATE MANAGEMENT
+https://redux.js.org
+https://zustand-demo.pmnd.rs
+https://recoiljs.org
+https://jotai.org
+
+DATA FETCHING / API
+https://tanstack.com/query/latest
+https://swr.vercel.app
+https://axios-http.com
+
+FORMS
+https://react-hook-form.com
+https://formik.org
+
+UI / COMPONENT LIBRARIES
+https://ui.shadcn.com
+https://mui.com
+https://chakra-ui.com
+https://mantine.dev
+https://ant.design
+
+STYLING
+https://tailwindcss.com/docs
+https://styled-components.com
+https://emotion.sh/docs/introduction
+
+ANIMATION
+https://www.framer.com/motion
+https://react-spring.dev
+
+ICONS
+https://lucide.dev
+https://heroicons.com
+
+AUTHENTICATION
+https://authjs.dev
+https://clerk.com
+https://supabase.com/docs/guides/auth
+
+DATABASE / ORM
+https://orm.drizzle.team
+https://www.prisma.io/docs
+https://supabase.com/docs
+
+VALIDATION
+https://zod.dev
+https://joi.dev
+
+UTILITIES
+https://lodash.com/docs
+https://date-fns.org
+
+TESTING
+https://jestjs.io/docs/getting-started
+https://testing-library.com/docs/react-testing-library/intro
+https://playwright.dev/docs/intro
+
+DEPLOYMENT / DEVOPS
+https://vercel.com/docs
+https://docs.netlify.com
+https://docs.docker.com
