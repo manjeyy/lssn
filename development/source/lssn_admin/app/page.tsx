@@ -184,6 +184,10 @@ export default function Home() {
           lssnsCount={lssns.length}
           categoriesCount={categories.length}
           topicsCount={topics.length}
+          users={users}
+          lssns={lssns}
+          categories={categories}
+          topics={topics}
           showCharts={activeTab === "home"}
         />
 

@@ -142,7 +142,7 @@ export default function Home() {
           ) : (
             <ScrollView horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={styles.featuredScroll}>
               {featuredLssns.map((item) => (
-                <FeaturedCard key={item.id} lssn={item} onPress={() => navigation.navigate('Lesson' as never, { lssnId: item.id } as never)} />
+                <FeaturedCard key={item.id} lssn={item} onPress={() => navigation.navigate('Lesson' as any, { lssnId: item.id } as any)} />
               ))}
             </ScrollView>
           )}
@@ -179,7 +179,7 @@ export default function Home() {
               <Text style={styles.sectionTitle}>More Lessons</Text>
             </View>
             {moreLssns.map((lssn) => (
-              <LssnListCard key={lssn.id} lssn={lssn} onPress={() => navigation.navigate('Lesson' as never, { lssnId: lssn.id } as never)} />
+              <LssnListCard key={lssn.id} lssn={lssn} onPress={() => navigation.navigate('Lesson' as any, { lssnId: lssn.id } as any)} />
             ))}
           </View>
         )}

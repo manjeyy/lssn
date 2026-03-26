@@ -7,7 +7,7 @@ import { StyleSheet, View } from 'react-native';
 import { Button } from '../components/Button';
 
 export default function Overview() {
-  const navigation = useNavigation();
+  const navigation: any = useNavigation();
 
   return (
     <View style={styles.container}>

@@ -85,7 +85,7 @@ export default function Details({ route }: Props) {
     <View style={styles.container}>
       {slides.length > 0 && (
         <View style={styles.progressBar}>
-          {slides.map((_, i) => (
+          {slides.map((_: any, i: any) => (
             <View key={i} style={[styles.progressSegment, { flex: 1 }, i <= currentIndex ? { backgroundColor: darkTheme.primary } : { backgroundColor: darkTheme.border }, i > 0 && { marginLeft: 3 }]} />
           ))}
         </View>

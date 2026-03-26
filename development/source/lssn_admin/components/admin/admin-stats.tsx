@@ -1,5 +1,6 @@
 "use client";
 
+import { useMemo } from "react";
 import { BookOpenCheck, Layers3, Tags, Users2 } from "lucide-react";
 import {
   AreaChart,
@@ -7,8 +8,6 @@ import {
   XAxis,
   YAxis,
   CartesianGrid,
-  Tooltip,
-  ResponsiveContainer,
 } from "recharts";
 
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -16,8 +15,6 @@ import {
   ChartContainer,
   ChartTooltip,
   ChartTooltipContent,
-  ChartLegend,
-  ChartLegendContent,
   type ChartConfig,
 } from "@/components/ui/chart";
 
@@ -26,6 +23,10 @@ type AdminStatsProps = {
   lssnsCount: number;
   categoriesCount: number;
   topicsCount: number;
+  users: Array<{ createdAt?: string | Date | null }>;
+  lssns: Array<{ createdAt?: string | Date | null }>;
+  categories: Array<{ createdAt?: string | Date | null }>;
+  topics: Array<{ createdAt?: string | Date | null }>;
   showCharts?: boolean;
 };
 
@@ -72,15 +73,14 @@ const statCards = [
   },
 ] as const;
 
-// Sample data for the last 6 months
-const chartData = [
-  { month: "Sep", users: 45, lssns: 12, categories: 8, topics: 24 },
-  { month: "Oct", users: 52, lssns: 15, categories: 9, topics: 28 },
-  { month: "Nov", users: 68, lssns: 22, categories: 11, topics: 35 },
-  { month: "Dec", users: 85, lssns: 31, categories: 14, topics: 42 },
-  { month: "Jan", users: 102, lssns: 42, categories: 18, topics: 51 },
-  { month: "Feb", users: 128, lssns: 58, categories: 22, topics: 63 },
-];
+type ChartPoint = {
+  month: string;
+  monthKey: string;
+  users: number;
+  lssns: number;
+  categories: number;
+  topics: number;
+};
 
 const chartConfig = {
   users: {
@@ -106,6 +106,10 @@ export function AdminStats({
   lssnsCount,
   categoriesCount,
   topicsCount,
+  users,
+  lssns,
+  categories,
+  topics,
   showCharts = false,
 }: AdminStatsProps) {
   const values = {
@@ -114,6 +118,48 @@ export function AdminStats({
     categoriesCount,
     topicsCount,
   };
+
+  const chartData = useMemo<ChartPoint[]>(() => {
+    const now = new Date();
+    const lastSixMonths = Array.from({ length: 6 }, (_, index) => {
+      const date = new Date(now.getFullYear(), now.getMonth() - (5 - index), 1);
+      return {
+        month: date.toLocaleDateString("en-US", { month: "short" }),
+        monthKey: `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, "0")}`,
+        users: 0,
+        lssns: 0,
+        categories: 0,
+        topics: 0,
+      };
+    });
+
+    const indexByMonthKey = new Map(lastSixMonths.map((point, index) => [point.monthKey, index]));
+
+    const applySeries = (
+      items: Array<{ createdAt?: string | Date | null }>,
+      key: "users" | "lssns" | "categories" | "topics"
+    ) => {
+      items.forEach((item) => {
+        if (!item.createdAt) return;
+
+        const createdDate = new Date(item.createdAt);
+        if (Number.isNaN(createdDate.getTime())) return;
+
+        const monthKey = `${createdDate.getFullYear()}-${String(createdDate.getMonth() + 1).padStart(2, "0")}`;
+        const pointIndex = indexByMonthKey.get(monthKey);
+        if (pointIndex === undefined) return;
+
+        lastSixMonths[pointIndex][key] += 1;
+      });
+    };
+
+    applySeries(users, "users");
+    applySeries(lssns, "lssns");
+    applySeries(categories, "categories");
+    applySeries(topics, "topics");
+
+    return lastSixMonths;
+  }, [users, lssns, categories, topics]);
 
   return (
     <div className="space-y-6">

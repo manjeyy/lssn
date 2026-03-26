@@ -139,6 +139,7 @@ export default function DashboardPage() {
                 totalLikes={stats.totalLikes}
                 totalLssns={stats.totalLssns}
                 avgRating={stats.avgRating}
+                lssns={lssns}
               />
             )}
 

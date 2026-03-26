@@ -100,7 +100,10 @@ export default function Profile() {
             <Divider />
             <PermissionRow label="React to slides" granted />
             <Divider />
-            <PermissionRow label="Create lessons" granted={role === 'creator' || role === 'admin'} />
+            <PermissionRow
+              label="Create lessons"
+              granted={role === 'creator' || role === 'admin'}
+            />
             <Divider />
             <PermissionRow label="Admin panel" granted={role === 'admin'} />
           </View>
@@ -142,7 +145,11 @@ function PermissionRow({ label, granted }: { label: string; granted: boolean }) 
           size={11}
           color={granted ? '#4ade80' : darkTheme.mutedForeground}
         />
-        <Text style={[styles.permBadgeText, { color: granted ? '#4ade80' : darkTheme.mutedForeground }]}>
+        <Text
+          style={[
+            styles.permBadgeText,
+            { color: granted ? '#4ade80' : darkTheme.mutedForeground },
+          ]}>
           {granted ? 'Allowed' : 'Restricted'}
         </Text>
       </View>
@@ -156,7 +163,12 @@ function Divider() {
 
 const styles = StyleSheet.create({
   container: { flex: 1, backgroundColor: darkTheme.background },
-  center: { flex: 1, backgroundColor: darkTheme.background, alignItems: 'center', justifyContent: 'center' },
+  center: {
+    flex: 1,
+    backgroundColor: darkTheme.background,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
   scroll: { padding: 24, paddingBottom: 48 },
   heroSection: { alignItems: 'center', marginBottom: 32, paddingTop: 8 },
   avatar: {
@@ -218,9 +230,21 @@ const styles = StyleSheet.create({
   },
   infoValue: { fontSize: 15, color: darkTheme.foreground, fontWeight: '500' },
   divider: { height: 1, backgroundColor: darkTheme.border, marginLeft: 58 },
-  permRow: { flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', padding: 14 },
+  permRow: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    padding: 14,
+  },
   permLabel: { fontSize: 14, color: darkTheme.foreground, fontWeight: '500' },
-  permBadge: { flexDirection: 'row', alignItems: 'center', gap: 4, paddingHorizontal: 10, paddingVertical: 4, borderRadius: 100 },
+  permBadge: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 4,
+    paddingHorizontal: 10,
+    paddingVertical: 4,
+    borderRadius: 100,
+  },
   permGranted: { backgroundColor: '#1e3a2e' },
   permDenied: { backgroundColor: darkTheme.secondary },
   permBadgeText: { fontSize: 12, fontWeight: '600' },

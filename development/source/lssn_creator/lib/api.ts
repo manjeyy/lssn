@@ -17,6 +17,8 @@ type AuthResponse = {
 const ACCESS_KEY = 'lssn_access_token';
 const REFRESH_KEY = 'lssn_refresh_token';
 const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL ?? 'http://localhost:5000';
+const ACCESS_COOKIE = 'lssn_access_token';
+const REFRESH_COOKIE = 'lssn_refresh_token';
 
 export function getApiBaseUrl() {
   return API_BASE_URL;
@@ -32,9 +34,19 @@ function setStoredToken(key: string, value: string) {
   window.localStorage.setItem(key, value);
 }
 
+function setCookieToken(key: string, value: string) {
+  if (typeof document === 'undefined') return;
+  document.cookie = `${key}=${encodeURIComponent(value)}; path=/; max-age=${60 * 60 * 24 * 30}; samesite=lax`;
+}
+
 function clearStoredToken(key: string) {
   if (typeof window === 'undefined') return;
   window.localStorage.removeItem(key);
+}
+
+function clearCookieToken(key: string) {
+  if (typeof document === 'undefined') return;
+  document.cookie = `${key}=; path=/; max-age=0; samesite=lax`;
 }
 
 export function getAccessToken(): string | null {
@@ -48,11 +60,15 @@ export function getRefreshToken(): string | null {
 export function setTokens(tokens: Tokens) {
   setStoredToken(ACCESS_KEY, tokens.accessToken);
   setStoredToken(REFRESH_KEY, tokens.refreshToken);
+  setCookieToken(ACCESS_COOKIE, tokens.accessToken);
+  setCookieToken(REFRESH_COOKIE, tokens.refreshToken);
 }
 
 export function clearTokens() {
   clearStoredToken(ACCESS_KEY);
   clearStoredToken(REFRESH_KEY);
+  clearCookieToken(ACCESS_COOKIE);
+  clearCookieToken(REFRESH_COOKIE);
 }
 
 async function requestJson<T>(path: string, init?: RequestInit): Promise<T> {
@@ -136,6 +152,16 @@ export async function login(email: string, password: string) {
   const data = await requestJson<AuthResponse>('/auth/login', {
     method: 'POST',
     body: JSON.stringify({ email, password }),
+  });
+
+  setTokens({ accessToken: data.accessToken, refreshToken: data.refreshToken });
+  return data.user;
+}
+
+export async function register(name: string, email: string, password: string) {
+  const data = await requestJson<AuthResponse>('/auth/register', {
+    method: 'POST',
+    body: JSON.stringify({ name, email, password }),
   });
 
   setTokens({ accessToken: data.accessToken, refreshToken: data.refreshToken });

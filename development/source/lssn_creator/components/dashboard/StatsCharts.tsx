@@ -12,23 +12,20 @@ import {
   Line,
 } from 'recharts'
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card'
-import { ChartContainer, ChartTooltip, ChartTooltipContent } from '@/components/ui/chart'
 
-// Generate mock data for the last 7 days
-const generateChartData = (name: string, baseValue: number, variance: number) => {
-  const days = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
-  return days.map((day, index) => ({
-    date: day,
-    [name]: Math.floor(baseValue + Math.random() * variance - variance / 2),
-  }))
+export type TrendDataPoint = {
+  date: string
+  views: number
+  likes: number
+  lssns: number
+  rating: number
 }
 
-const viewsData = generateChartData('views', 450, 300)
-const likesData = generateChartData('likes', 280, 150)
-const lssnsData = generateChartData('lssns', 15, 8)
-const ratingsData = generateChartData('rating', 72, 15)
+type ChartProps = {
+  data: TrendDataPoint[]
+}
 
-export function ViewsChart() {
+export function ViewsChart({ data }: ChartProps) {
   return (
     <Card className="app-surface border app-border shadow-none">
       <CardHeader>
@@ -38,7 +35,7 @@ export function ViewsChart() {
       <CardContent>
         <div className="h-64">
           <ResponsiveContainer width="100%" height="100%">
-            <AreaChart data={viewsData} margin={{ top: 10, right: 30, left: 0, bottom: 0 }}>
+            <AreaChart data={data} margin={{ top: 10, right: 30, left: 0, bottom: 0 }}>
               <defs>
                 <linearGradient id="colorViews" x1="0" y1="0" x2="0" y2="1">
                   <stop offset="5%" stopColor="#06b6d4" stopOpacity={0.8} />
@@ -72,7 +69,7 @@ export function ViewsChart() {
   )
 }
 
-export function LikesChart() {
+export function LikesChart({ data }: ChartProps) {
   return (
     <Card className="app-surface border app-border shadow-none">
       <CardHeader>
@@ -82,7 +79,7 @@ export function LikesChart() {
       <CardContent>
         <div className="h-64">
           <ResponsiveContainer width="100%" height="100%">
-            <AreaChart data={likesData} margin={{ top: 10, right: 30, left: 0, bottom: 0 }}>
+            <AreaChart data={data} margin={{ top: 10, right: 30, left: 0, bottom: 0 }}>
               <defs>
                 <linearGradient id="colorLikes" x1="0" y1="0" x2="0" y2="1">
                   <stop offset="5%" stopColor="#f43f5e" stopOpacity={0.8} />
@@ -116,7 +113,7 @@ export function LikesChart() {
   )
 }
 
-export function LssnsChart() {
+export function LssnsChart({ data }: ChartProps) {
   return (
     <Card className="app-surface border app-border shadow-none">
       <CardHeader>
@@ -126,7 +123,7 @@ export function LssnsChart() {
       <CardContent>
         <div className="h-64">
           <ResponsiveContainer width="100%" height="100%">
-            <AreaChart data={lssnsData} margin={{ top: 10, right: 30, left: 0, bottom: 0 }}>
+            <AreaChart data={data} margin={{ top: 10, right: 30, left: 0, bottom: 0 }}>
               <defs>
                 <linearGradient id="colorLssns" x1="0" y1="0" x2="0" y2="1">
                   <stop offset="5%" stopColor="#10b981" stopOpacity={0.8} />
@@ -160,7 +157,7 @@ export function LssnsChart() {
   )
 }
 
-export function RatingChart() {
+export function RatingChart({ data }: ChartProps) {
   return (
     <Card className="app-surface border app-border shadow-none">
       <CardHeader>
@@ -170,7 +167,7 @@ export function RatingChart() {
       <CardContent>
         <div className="h-64">
           <ResponsiveContainer width="100%" height="100%">
-            <LineChart data={ratingsData} margin={{ top: 10, right: 30, left: 0, bottom: 0 }}>
+            <LineChart data={data} margin={{ top: 10, right: 30, left: 0, bottom: 0 }}>
               <defs>
                 <linearGradient id="colorRating" x1="0" y1="0" x2="0" y2="1">
                   <stop offset="5%" stopColor="#f59e0b" stopOpacity={0.8} />
