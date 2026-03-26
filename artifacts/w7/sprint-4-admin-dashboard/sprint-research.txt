@@ -1,0 +1,12 @@
+Sprint purpose: Build the admin dashboard for platform control, analytics visibility, and secure operational management.
+
+Research sources:
+Next.js Dashboard Tutorial: https://nextjs.org/learn/dashboard-app
+Recharts Docs (charts and analytics): https://recharts.org/en-US/guide
+TanStack Table Docs (admin data tables): https://tanstack.com/table/latest/docs/guide/introduction
+shadcn/ui Documentation: https://ui.shadcn.com/docs
+Role-Based Access Control Concepts (NIST): https://csrc.nist.gov/projects/role-based-access-control
+OWASP Access Control Cheat Sheet: https://cheatsheetseries.owasp.org/cheatsheets/Authorization_Cheat_Sheet.html
+NestJS Guards (access control): https://docs.nestjs.com/guards
+Web Content Accessibility Guidelines: https://www.w3.org/WAI/standards-guidelines/wcag/
+Data Visualization Accessibility: https://www.w3.org/WAI/perspective-videos/data-visualization/

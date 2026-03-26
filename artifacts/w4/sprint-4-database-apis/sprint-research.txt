@@ -1,0 +1,12 @@
+Sprint purpose: Deliver production-ready database schema and secure APIs for users, slides, categories, and statistics services.
+
+Research sources:
+NestJS Controllers: https://docs.nestjs.com/controllers
+NestJS Providers and Modules: https://docs.nestjs.com/providers
+NestJS Validation: https://docs.nestjs.com/techniques/validation
+Drizzle ORM Docs: https://orm.drizzle.team/docs/overview
+Drizzle Migrations: https://orm.drizzle.team/docs/migrations
+PostgreSQL Documentation: https://www.postgresql.org/docs/
+OpenAPI Specification: https://swagger.io/specification/
+REST API Design Best Practices: https://learn.microsoft.com/azure/architecture/best-practices/api-design
+OWASP API Security Top 10: https://owasp.org/www-project-api-security/

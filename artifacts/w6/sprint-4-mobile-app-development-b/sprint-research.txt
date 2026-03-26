@@ -1,0 +1,10 @@
+Sprint purpose: Refine and harden the mobile app by completing screen coverage, auth integration, and performance/usability validation.
+
+Research sources:
+React Native Performance Guide: https://reactnative.dev/docs/performance
+Expo Performance and Optimization: https://docs.expo.dev/guides/improve-performance/
+React Native FlatList Optimization: https://reactnative.dev/docs/optimizing-flatlist-configuration
+React Native Profiling: https://reactnative.dev/docs/profiling
+Redux Toolkit Docs (mobile state management): https://redux-toolkit.js.org/introduction/getting-started
+React Navigation Best Practices: https://reactnavigation.org/docs/best-practices
+Lighthouse Mobile Performance Principles: https://developer.chrome.com/docs/lighthouse/performance

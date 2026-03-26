@@ -1,0 +1,12 @@
+Sprint purpose: Establish core authentication and authorization workflows while finalizing UI/UX direction for both Creator and App experiences.
+
+Research sources:
+NestJS Authentication: https://docs.nestjs.com/security/authentication
+NestJS Authorization: https://docs.nestjs.com/security/authorization
+Passport.js Concepts: https://www.passportjs.org/concepts/authentication/
+JWT Introduction (RFC 7519): https://datatracker.ietf.org/doc/html/rfc7519
+Next.js Authentication Guide: https://nextjs.org/docs/app/guides/authentication
+React Navigation Authentication Flows: https://reactnavigation.org/docs/auth-flow
+Material Design Login UX Best Practices: https://m3.material.io/components/text-fields/guidelines
+OWASP Authentication Cheat Sheet: https://cheatsheetseries.owasp.org/cheatsheets/Authentication_Cheat_Sheet.html
+OWASP Session Management Cheat Sheet: https://cheatsheetseries.owasp.org/cheatsheets/Session_Management_Cheat_Sheet.html

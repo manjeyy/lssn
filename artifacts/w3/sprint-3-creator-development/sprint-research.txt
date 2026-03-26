@@ -1,0 +1,12 @@
+Sprint purpose: Build the LSSN Creator core authoring workflow, including slide creation logic, rendering/editing, and scalable architecture foundations.
+
+Research sources:
+Next.js App Router: https://nextjs.org/docs/app
+Next.js Server Actions and Forms: https://nextjs.org/docs/app/building-your-application/data-fetching/server-actions-and-mutations
+React Docs (State Management): https://react.dev/learn/managing-state
+React Docs (Optimizing Performance): https://react.dev/learn/render-and-commit
+React DnD (drag-and-drop patterns): https://react-dnd.github.io/react-dnd/about
+Lexical Editor Docs (rich content authoring): https://lexical.dev/docs/intro
+Slate Rich Text Editor Docs: https://docs.slatejs.org/
+TanStack Query Docs (data sync in creator): https://tanstack.com/query/latest/docs/framework/react/overview
+System Design Primer (scalable architecture reference): https://github.com/donnemartin/system-design-primer
