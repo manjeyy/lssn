@@ -1,0 +1,29 @@
+Next.js
+https://nextjs.org/docs
+
+React.js
+https://react.dev
+
+React Native
+https://reactnative.dev/docs/getting-started
+
+Expo
+https://docs.expo.dev
+
+React Navigation
+https://reactnavigation.org/docs/getting-started
+
+ShadCN UI
+https://ui.shadcn.com
+
+ShadCN Blocks
+https://blocks.shadcn.com
+
+ShadCN Examples
+https://ui.shadcn.com/examples
+
+NestJS Docs
+https://docs.nestjs.com
+
+NestJS Tutorials
+https://docs.nestjs.com/first-steps

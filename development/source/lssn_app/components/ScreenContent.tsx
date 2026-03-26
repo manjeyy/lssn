@@ -1,5 +1,6 @@
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
+import { darkTheme } from '../lib/theme';
 
 import EditScreenInfo from './EditScreenInfo';
 
@@ -23,12 +24,12 @@ export const ScreenContent = ({ title, path, children }: ScreenContentProps) => 
 const styles = StyleSheet.create({
   container: {
     alignItems: 'center',
-    backgroundColor: 'white',
+    backgroundColor: darkTheme.background,
     flex: 1,
     justifyContent: 'center',
   },
   separator: {
-    backgroundColor: '#d1d5db',
+    backgroundColor: darkTheme.border,
     height: 1,
     marginVertical: 30,
     width: '80%',
@@ -36,5 +37,6 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 20,
     fontWeight: 'bold',
+    color: darkTheme.foreground,
   },
 });

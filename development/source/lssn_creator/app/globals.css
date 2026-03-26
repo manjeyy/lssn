@@ -45,6 +45,8 @@
 
 :root {
   --radius: 0.625rem;
+  --app-primary: #098fc8;
+  --app-primary-foreground: #081108;
   --background: oklch(1 0 0);
   --foreground: oklch(0.13 0.028 261.692);
   --card: oklch(1 0 0);
@@ -79,6 +81,8 @@
 }
 
 .dark {
+  --app-primary: #00a6f4;
+  --app-primary-foreground: #081108;
   --background: oklch(0.13 0.028 261.692);
   --foreground: oklch(0.985 0.002 247.839);
   --card: oklch(0.21 0.034 264.665);
@@ -119,4 +123,73 @@
   body {
     @apply bg-background text-foreground;
   }
+}
+
+.creator-ui,
+.creator-ui * {
+  animation: none !important;
+  transition: none !important;
+  box-shadow: none !important;
+}
+
+.creator-shell {
+  background:
+    radial-gradient(1200px 600px at 18% -10%, rgba(14, 165, 233, 0.22), transparent 60%),
+    radial-gradient(900px 520px at 92% 10%, rgba(16, 185, 129, 0.2), transparent 60%),
+    radial-gradient(800px 520px at 70% 85%, rgba(245, 158, 11, 0.2), transparent 60%),
+    #0b1220;
+}
+
+.creator-panel {
+  background: #0f172a;
+  border: 1px solid #1f2a44;
+}
+
+.creator-grid {
+  background-image: radial-gradient(#1f2a44 1px, transparent 1px);
+  background-size: 18px 18px;
+}
+
+.primary-solid {
+  background: var(--app-primary);
+  color: var(--app-primary-foreground);
+}
+
+.app-bg {
+  background-color: #181c1f;
+  color: #ffffff;
+}
+
+.app-surface {
+  background-color: #212529;
+}
+
+.app-surface-2 {
+  background-color: #131517;
+}
+
+.app-border {
+  border-color: #212529;
+}
+
+.text-strong {
+  color: #ffffff;
+}
+
+.text-muted {
+  color: #b3c0d4;
+}
+
+.text-subtle {
+  color: #8a9ab2;
+}
+
+.app-input {
+  background-color: #04070c;
+  border: 1px solid #000000;
+  color: #f1f5f9;
+}
+
+.app-input::placeholder {
+  color: #d9dfec;
 }

@@ -1,14 +1,27 @@
-import { DefaultTheme, DarkTheme } from '@react-navigation/native';
-import { useColorScheme } from 'react-native';
+import { DarkTheme } from '@react-navigation/native';
 import { useMemo } from 'react';
 
 import 'react-native-gesture-handler';
 
 import Navigation from './navigation';
+import { darkTheme } from './lib/theme';
 
 export default function App() {
-  const colorScheme = useColorScheme();
-  const theme = useMemo(() => (colorScheme === 'dark' ? DarkTheme : DefaultTheme), [colorScheme]);
+  // Always use dark theme to match lssn_creator design
+  const theme = useMemo(
+    () => ({
+      ...DarkTheme,
+      colors: {
+        ...DarkTheme.colors,
+        primary: darkTheme.primary,
+        background: darkTheme.background,
+        card: darkTheme.card,
+        text: darkTheme.foreground,
+        border: darkTheme.border,
+      },
+    }),
+    []
+  );
 
   return <Navigation theme={theme} />;
 }

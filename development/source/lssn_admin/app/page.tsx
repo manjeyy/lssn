@@ -1,65 +1,273 @@
-import Image from "next/image";
+"use client";
+
+import { useEffect, useMemo, useState } from "react";
+import {
+  createCategory,
+  createTopic,
+  deleteCategory,
+  deleteLssn,
+  deleteTopic,
+  deleteUser,
+  getCategories,
+  getLssnsAll,
+  getTopics,
+  getUsers,
+  login,
+  logout,
+  updateCategory,
+  updateLssn,
+  updateTopic,
+  updateUserRole,
+  uploadImage,
+} from "@/lib/api";
+import { AdminHeader } from "@/components/admin/admin-header";
+import { AdminLoginCard } from "@/components/admin/admin-login-card";
+import { AdminShell } from "@/components/admin/admin-shell";
+import { AdminSidebar } from "@/components/admin/admin-sidebar";
+import { AdminStats } from "@/components/admin/admin-stats";
+import { StatusBanner } from "@/components/admin/status-banner";
+import {
+  CategoriesSection,
+  LssnsSection,
+  TopicsSection,
+  UsersSection,
+} from "@/components/admin/sections";
+import type { AdminTabKey } from "@/components/admin/types";
 
 export default function Home() {
+  const [user, setUser] = useState<{ email: string; role: string } | null>(null);
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState<string | null>(null);
+  const [isLoading, setIsLoading] = useState(false);
+  const [activeTab, setActiveTab] = useState<AdminTabKey>("home");
+
+  const [users, setUsers] = useState<any[]>([]);
+  const [lssns, setLssns] = useState<any[]>([]);
+  const [categories, setCategories] = useState<any[]>([]);
+  const [topics, setTopics] = useState<any[]>([]);
+
+  const [categoryName, setCategoryName] = useState("");
+  const [categorySlug, setCategorySlug] = useState("");
+  const [categoryThumb, setCategoryThumb] = useState<string | null>(null);
+  const [topicName, setTopicName] = useState("");
+  const [topicSlug, setTopicSlug] = useState("");
+
+  const hasData = useMemo(
+    () => users.length || lssns.length || categories.length || topics.length,
+    [users, lssns, categories, topics]
+  );
+
+  const loadAll = async () => {
+    setIsLoading(true);
+    setError(null);
+
+    try {
+      const [usersRows, lssnRows, categoryRows, topicRows] = await Promise.all([
+        getUsers(),
+        getLssnsAll(),
+        getCategories(),
+        getTopics(),
+      ]);
+      setUsers(usersRows);
+      setLssns(lssnRows);
+      setCategories(categoryRows);
+      setTopics(topicRows);
+    } catch (err) {
+      const message = err instanceof Error ? err.message : "Failed to load admin data";
+      setError(message);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    if (user) {
+      loadAll();
+    }
+  }, [user]);
+
+  const handleLogin = async (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    setIsLoading(true);
+    setError(null);
+
+    try {
+      const result = await login(email, password);
+      if (result.role !== "admin") {
+        throw new Error("Admin access required");
+      }
+      setUser({ email: result.email, role: result.role });
+      setPassword("");
+    } catch (err) {
+      const message = err instanceof Error ? err.message : "Login failed";
+      setError(message);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  const handleLogout = async () => {
+    await logout();
+    setUser(null);
+    setUsers([]);
+    setLssns([]);
+    setCategories([]);
+    setTopics([]);
+  };
+
+  const handleCategoryUpload = async (file: File) => {
+    const result = await uploadImage(file);
+    setCategoryThumb(result.url);
+  };
+
+  const handleCreateCategory = async () => {
+    if (!categoryName.trim()) return;
+    const created = await createCategory({
+      name: categoryName,
+      slug: categorySlug || undefined,
+      thumbnailUrl: categoryThumb ?? undefined,
+    });
+    setCategories((prev) => [created, ...prev]);
+    setCategoryName("");
+    setCategorySlug("");
+    setCategoryThumb(null);
+  };
+
+  const handleCreateTopic = async () => {
+    if (!topicName.trim()) return;
+    const created = await createTopic({
+      name: topicName,
+      slug: topicSlug || undefined,
+    });
+    setTopics((prev) => [created, ...prev]);
+    setTopicName("");
+    setTopicSlug("");
+  };
+
+  if (!user) {
+    return (
+      <AdminLoginCard
+        email={email}
+        password={password}
+        error={error}
+        isLoading={isLoading}
+        onEmailChange={setEmail}
+        onPasswordChange={setPassword}
+        onSubmit={handleLogin}
+      />
+    );
+  }
+
   return (
-    <div className="flex min-h-screen items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex min-h-screen w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
+    <AdminShell
+      sidebar={
+        <AdminSidebar
+          activeTab={activeTab}
+          onTabChange={setActiveTab}
+          onLogout={handleLogout}
         />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
-        </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
-        </div>
-      </main>
-    </div>
+      }
+      header={
+        <AdminHeader
+          userEmail={user.email}
+          activeTab={activeTab}
+          onRefresh={loadAll}
+          onLogout={handleLogout}
+          isLoading={isLoading}
+        />
+      }
+    >
+      <div className="space-y-6">
+        <AdminStats
+          usersCount={users.length}
+          lssnsCount={lssns.length}
+          categoriesCount={categories.length}
+          topicsCount={topics.length}
+          users={users}
+          lssns={lssns}
+          categories={categories}
+          topics={topics}
+          showCharts={activeTab === "home"}
+        />
+
+        <StatusBanner error={error} isLoading={isLoading} hasData={!!hasData} />
+        {activeTab === "users" && (
+          <UsersSection
+            users={users}
+            onRoleChange={async (id, role) => {
+              const updated = await updateUserRole(id as any, role as any);
+              setUsers((prev) =>
+                prev.map((item) => (item.id === id ? updated : item))
+              );
+            }}
+            onDelete={async (id) => {
+              await deleteUser(id as any);
+              setUsers((prev) => prev.filter((item) => item.id !== id));
+            }}
+          />
+        )}
+
+        {activeTab === "lssns" && (
+          <LssnsSection
+            lssns={lssns}
+            onToggleStatus={async (id, status) => {
+              const updated = await updateLssn(id as any, { status });
+              setLssns((prev) =>
+                prev.map((item) => (item.id === id ? updated : item))
+              );
+            }}
+            onDelete={async (id) => {
+              await deleteLssn(id as any);
+              setLssns((prev) => prev.filter((item) => item.id !== id));
+            }}
+          />
+        )}
+
+        {activeTab === "categories" && (
+          <CategoriesSection
+            categories={categories}
+            categoryName={categoryName}
+            categorySlug={categorySlug}
+            categoryThumb={categoryThumb}
+            onCategoryNameChange={setCategoryName}
+            onCategorySlugChange={setCategorySlug}
+            onUpload={handleCategoryUpload}
+            onCreate={handleCreateCategory}
+            onRefresh={async (id, name) => {
+              const updated = await updateCategory(id as any, { name });
+              setCategories((prev) =>
+                prev.map((item) => (item.id === id ? updated : item))
+              );
+            }}
+            onDelete={async (id) => {
+              await deleteCategory(id as any);
+              setCategories((prev) => prev.filter((item) => item.id !== id));
+            }}
+          />
+        )}
+
+        {activeTab === "topics" && (
+          <TopicsSection
+            topics={topics}
+            topicName={topicName}
+            topicSlug={topicSlug}
+            onTopicNameChange={setTopicName}
+            onTopicSlugChange={setTopicSlug}
+            onCreate={handleCreateTopic}
+            onRefresh={async (id, name) => {
+              const updated = await updateTopic(id as any, { name });
+              setTopics((prev) =>
+                prev.map((item) => (item.id === id ? updated : item))
+              );
+            }}
+            onDelete={async (id) => {
+              await deleteTopic(id as any);
+              setTopics((prev) => prev.filter((item) => item.id !== id));
+            }}
+          />
+        )}
+      </div>
+    </AdminShell>
   );
 }

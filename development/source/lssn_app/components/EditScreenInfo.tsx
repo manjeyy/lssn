@@ -1,4 +1,5 @@
 import { StyleSheet, Text, View } from 'react-native';
+import { darkTheme } from '../lib/theme';
 
 export default function EditScreenInfo({ path }: { path: string }) {
   const title = 'Open up the code for this screen:';
@@ -9,7 +10,7 @@ export default function EditScreenInfo({ path }: { path: string }) {
     <View style={styles.getStartedContainer}>
       <Text style={styles.getStartedText}>{title}</Text>
       <View style={[styles.codeHighlightContainer, styles.homeScreenFilename]}>
-        <Text>{path}</Text>
+        <Text style={styles.pathText}>{path}</Text>
       </View>
       <Text style={styles.getStartedText}>{description}</Text>
     </View>
@@ -18,8 +19,12 @@ export default function EditScreenInfo({ path }: { path: string }) {
 
 const styles = StyleSheet.create({
   codeHighlightContainer: {
-    borderRadius: 3,
-    paddingHorizontal: 4,
+    borderRadius: 8,
+    paddingHorizontal: 12,
+    paddingVertical: 6,
+    backgroundColor: darkTheme.card,
+    borderWidth: 1,
+    borderColor: darkTheme.border,
   },
   getStartedContainer: {
     alignItems: 'center',
@@ -29,6 +34,11 @@ const styles = StyleSheet.create({
     fontSize: 17,
     lineHeight: 24,
     textAlign: 'center',
+    color: darkTheme.foreground,
+  },
+  pathText: {
+    color: darkTheme.primary,
+    fontSize: 14,
   },
   helpContainer: {
     alignItems: 'center',
@@ -40,6 +50,7 @@ const styles = StyleSheet.create({
   },
   helpLinkText: {
     textAlign: 'center',
+    color: darkTheme.foreground,
   },
   homeScreenFilename: {
     marginVertical: 7,
