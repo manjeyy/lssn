@@ -1,0 +1,73 @@
+<mxfile host="65bd71144e">
+    <diagram id="fe5-mobile-consume" name="FE5 Mobile Learn And React">
+        <mxGraphModel dx="2440" dy="897" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1900" pageHeight="1200" math="0" shadow="0">
+            <root>
+                <mxCell id="0"/>
+                <mxCell id="1" parent="0"/>
+                <mxCell id="2" value="Open Home screen" style="ellipse;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;" parent="1" vertex="1">
+                    <mxGeometry x="60" y="170" width="210" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="3" value="Load in parallel: GET /categories,&#xa;GET /topics, GET /lssns (published)" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" parent="1" vertex="1">
+                    <mxGeometry x="320" y="160" width="330" height="80" as="geometry"/>
+                </mxCell>
+                <mxCell id="4" value="Filter by search and topic" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;" parent="1" vertex="1">
+                    <mxGeometry x="700" y="170" width="230" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="5" value="Select a lesson card" style="rhombus;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;" parent="1" vertex="1">
+                    <mxGeometry x="980" y="165" width="210" height="80" as="geometry"/>
+                </mxCell>
+                <mxCell id="6" value="Navigate to Details/Lesson screen" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" parent="1" vertex="1">
+                    <mxGeometry x="1240" y="170" width="250" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="7" value="GET /lssns/:id&#xa;load slides and content" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" parent="1" vertex="1">
+                    <mxGeometry x="1540" y="170" width="230" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="8" value="Render slide canvas&#xa;(text, shapes, images)" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;" parent="1" vertex="1">
+                    <mxGeometry x="1820" y="170" width="230" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="9" value="User taps Like/Dislike?" style="rhombus;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;" parent="1" vertex="1">
+                    <mxGeometry x="1540" y="300" width="240" height="80" as="geometry"/>
+                </mxCell>
+                <mxCell id="10" value="POST /lssns/:id/slides/:index/reactions" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" parent="1" vertex="1">
+                    <mxGeometry x="1830" y="305" width="260" height="70" as="geometry"/>
+                </mxCell>
+                <mxCell id="11" value="Server toggles/switches reaction&#xa;updates slide + lesson counts and rating" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#666666;" parent="1" vertex="1">
+                    <mxGeometry x="2130" y="300" width="300" height="80" as="geometry"/>
+                </mxCell>
+                <mxCell id="12" value="Update local reaction state" style="ellipse;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;" parent="1" vertex="1">
+                    <mxGeometry x="2470" y="310" width="220" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="20" style="endArrow=block;html=1;" parent="1" source="2" target="3" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="21" style="endArrow=block;html=1;" parent="1" source="3" target="4" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="22" style="endArrow=block;html=1;" parent="1" source="4" target="5" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="23" value="Yes" style="endArrow=block;html=1;" parent="1" source="5" target="6" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="24" style="endArrow=block;html=1;" parent="1" source="6" target="7" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="25" style="endArrow=block;html=1;" parent="1" source="7" target="8" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="26" style="endArrow=block;html=1;" parent="1" source="8" target="9" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="27" value="Yes" style="endArrow=block;html=1;" parent="1" source="9" target="10" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="28" style="endArrow=block;html=1;" parent="1" source="10" target="11" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="29" style="endArrow=block;html=1;" parent="1" source="11" target="12" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+            </root>
+        </mxGraphModel>
+    </diagram>
+</mxfile>
