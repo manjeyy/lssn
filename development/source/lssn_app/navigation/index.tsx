@@ -30,13 +30,7 @@ const Stack = createStackNavigator({
     },
     Lesson: {
       screen: Details,
-      options: ({ navigation }) => ({
-        headerLeft: () => <BackButton onPress={navigation.goBack} />,
-        headerTitle: '',
-        headerStyle: { backgroundColor: darkTheme.background },
-        headerShadowVisible: false,
-        headerTintColor: darkTheme.foreground,
-      }),
+      options: { headerShown: false },
     },
     Profile: {
       screen: Profile,

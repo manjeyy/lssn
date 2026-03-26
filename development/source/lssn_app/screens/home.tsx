@@ -1,10 +1,11 @@
-﻿import React, { useCallback, useEffect, useMemo, useState } from 'react';
+import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import {
   View, Text, StyleSheet, TextInput, ScrollView, TouchableOpacity,
-  SafeAreaView, ActivityIndicator, Image, RefreshControl, Dimensions,
+  ActivityIndicator, Image, RefreshControl, Dimensions,
 } from 'react-native';
 import { Feather } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native';
+import { SafeAreaView } from 'react-native-safe-area-context';
 import { getCategories, getPublishedLssns, getTopics, resolveAssetUrl } from '../lib/api';
 import { useAuthStore } from '../store/store';
 import { darkTheme } from '../lib/theme';
@@ -75,7 +76,7 @@ export default function Home() {
   const firstName = user?.name?.split(' ')[0] ?? 'there';
 
   return (
-    <SafeAreaView style={styles.container}>
+    <SafeAreaView style={styles.container} edges={["top"]}>
       <ScrollView
         contentContainerStyle={styles.scrollContent}
         showsVerticalScrollIndicator={false}
@@ -83,25 +84,34 @@ export default function Home() {
           <RefreshControl refreshing={isRefreshing} onRefresh={() => load(true)} tintColor={darkTheme.primary} colors={[darkTheme.primary]} />
         }
       >
-        <View style={styles.header}>
-          <View>
-            <Text style={styles.greeting}>{getGreeting()},</Text>
-            <Text style={styles.userName}>{firstName} </Text>
-          </View>
-          <TouchableOpacity style={styles.profileBtn} onPress={() => navigation.navigate('Profile' as never)} activeOpacity={0.8}>
-            <Text style={styles.profileInitial}>{(user?.name?.[0] ?? '?').toUpperCase()}</Text>
-          </TouchableOpacity>
-        </View>
-
-        <View style={styles.searchBar}>
-          <Feather name="search" size={18} color={darkTheme.mutedForeground} />
-          <TextInput placeholder="Search lessons..." placeholderTextColor={darkTheme.mutedForeground}
-            style={styles.searchInput} value={searchQuery} onChangeText={setSearchQuery} />
-          {searchQuery ? (
-            <TouchableOpacity onPress={() => setSearchQuery('')}>
-              <Feather name="x" size={16} color={darkTheme.mutedForeground} />
+        <View style={styles.topBlock}>
+          <View style={styles.header}>
+            <View>
+              <Text style={styles.greeting}>{getGreeting()},</Text>
+              <Text style={styles.userName}>{firstName}</Text>
+            </View>
+            <TouchableOpacity style={styles.profileBtn} onPress={() => navigation.navigate('Profile' as never)} activeOpacity={0.8}>
+              <Text style={styles.profileInitial}>{(user?.name?.[0] ?? '?').toUpperCase()}</Text>
             </TouchableOpacity>
-          ) : null}
+          </View>
+
+          <View style={styles.searchBar}>
+            <View style={styles.searchIconBubble}>
+              <Feather name="search" size={16} color={darkTheme.primary} />
+            </View>
+            <TextInput
+              placeholder="Search lessons, topics, creators"
+              placeholderTextColor={darkTheme.mutedForeground}
+              style={styles.searchInput}
+              value={searchQuery}
+              onChangeText={setSearchQuery}
+            />
+            {searchQuery ? (
+              <TouchableOpacity onPress={() => setSearchQuery('')} style={styles.clearSearchBtn}>
+                <Feather name="x" size={14} color={darkTheme.mutedForeground} />
+              </TouchableOpacity>
+            ) : null}
+          </View>
         </View>
 
         {error ? (
@@ -243,14 +253,17 @@ function LssnListCard({ lssn, onPress }: { lssn: Lssn; onPress: () => void }) {
 
 const styles = StyleSheet.create({
   container: { flex: 1, backgroundColor: darkTheme.background },
-  scrollContent: { paddingBottom: 40 },
-  header: { flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', paddingHorizontal: 20, paddingTop: 16, paddingBottom: 14 },
+  scrollContent: { paddingBottom: 36 },
+  topBlock: { paddingHorizontal: 18, paddingTop: 10, paddingBottom: 14, gap: 14 },
+  header: { flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' },
   greeting: { fontSize: 13, color: darkTheme.mutedForeground, fontWeight: '500' },
-  userName: { fontSize: 24, fontWeight: '800', color: darkTheme.foreground, marginTop: 2 },
+  userName: { fontSize: 26, fontWeight: '800', color: darkTheme.foreground, marginTop: 2 },
   profileBtn: { width: 44, height: 44, borderRadius: 22, backgroundColor: darkTheme.primary + '20', borderWidth: 2, borderColor: darkTheme.primary, alignItems: 'center', justifyContent: 'center' },
   profileInitial: { fontSize: 17, fontWeight: '800', color: darkTheme.primary },
-  searchBar: { flexDirection: 'row', alignItems: 'center', gap: 10, marginHorizontal: 20, marginBottom: 16, backgroundColor: darkTheme.card, borderWidth: 1, borderColor: darkTheme.border, borderRadius: 14, paddingHorizontal: 14, paddingVertical: 12 },
-  searchInput: { flex: 1, fontSize: 15, color: darkTheme.foreground },
+  searchBar: { flexDirection: 'row', alignItems: 'center', gap: 10, backgroundColor: '#222236', borderWidth: 1, borderColor: '#34344a', borderRadius: 18, paddingHorizontal: 12, paddingVertical: 12 },
+  searchIconBubble: { width: 30, height: 30, borderRadius: 15, alignItems: 'center', justifyContent: 'center', backgroundColor: darkTheme.primary + '20' },
+  searchInput: { flex: 1, fontSize: 15, color: darkTheme.foreground, fontWeight: '500' },
+  clearSearchBtn: { width: 24, height: 24, borderRadius: 12, alignItems: 'center', justifyContent: 'center', backgroundColor: darkTheme.secondary },
   errorBanner: { flexDirection: 'row', alignItems: 'center', gap: 8, marginHorizontal: 20, marginBottom: 12, backgroundColor: darkTheme.destructive + '15', borderWidth: 1, borderColor: darkTheme.destructive + '40', borderRadius: 10, padding: 12 },
   errorText: { color: darkTheme.destructive, fontSize: 13, flex: 1 },
   retryText: { color: darkTheme.primary, fontWeight: '700', fontSize: 13 },

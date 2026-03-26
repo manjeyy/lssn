@@ -18,7 +18,7 @@ type AuthResponse = {
 
 const ACCESS_KEY = 'lssn_app_access_token';
 const REFRESH_KEY = 'lssn_app_refresh_token';
-const API_BASE_URL = process.env.EXPO_PUBLIC_API_BASE_URL ?? 'http://192.168.40.125:5000';
+const API_BASE_URL = process.env.EXPO_PUBLIC_API_BASE_URL ?? 'http://192.168.100.184:5000';
 
 export function getApiBaseUrl() {
   return API_BASE_URL;
