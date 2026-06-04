@@ -1,4 +1,10 @@
-# LSSN Platform
+# LSSN
+
+**
+Books are ideas compiled to long LESSONS.
+LSSN removes the noise and keeps only what truly matters.
+LSSN is LESSON but silent E AND O are cut
+**
 
 LSSN is a purpose-built, role-driven learning ecosystem designed for modern education and content monetization. It is not a single app; it is a coordinated product suite with a mobile learner experience, a creator studio, an administration console, and a full TypeScript backend.
 
