@@ -75,31 +75,31 @@ LSSN is a purpose-built, role-driven learning ecosystem designed for modern educ
 
 ### Learner authentication and onboarding
 
-![Authentication screen](Artifacts/w8/auth-1.jpeg)
+![Authentication screen](artifacts/w8/auth-1.jpeg)
 
-![Login flow and access control](Artifacts/w8/auth-2.jpeg)
+![Login flow and access control](artifacts/w8/auth-2.jpeg)
 
-![Secure session management](Artifacts/w8/auth-3.jpeg)
+![Secure session management](artifacts/w8/auth-3.jpeg)
 
 ### Creator studio and content production
 
-![Creator dashboard workspace](Artifacts/w8/create-1.jpeg)
+![Creator dashboard workspace](artifacts/w8/create-1.jpeg)
 
-![Lesson creation and draft management](Artifacts/w8/create-2.jpeg)
+![Lesson creation and draft management](artifacts/w8/create-2.jpeg)
 
 ### Admin governance and analytics
 
-![Admin content review and controls](Artifacts/w8/dash-1.jpeg)
+![Admin content review and controls](artifacts/w8/dash-1.jpeg)
 
-![Admin engagement reporting dashboard](Artifacts/w8/dash-3.jpeg)
+![Admin engagement reporting dashboard](artifacts/w8/dash-3.jpeg)
 
-![Creator performance analytics](Artifacts/w8/dash-6.jpeg)
+![Creator performance analytics](artifacts/w8/dash-6.jpeg)
 
 ### Mobile engagement and content consumption
 
-![Mobile lesson viewer and reactions](Artifacts/w8/dash-8.jpeg)
+![Mobile lesson viewer and reactions](artifacts/w8/dash-8.jpeg)
 
-![Learning session analytics and progress](Artifacts/w8/stats-1.jpeg)
+![Learning session analytics and progress](artifacts/w8/stats-1.jpeg)
 
 ## Getting started
 
