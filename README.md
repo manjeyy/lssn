@@ -79,8 +79,6 @@ LSSN is a purpose-built, role-driven learning ecosystem designed for modern educ
 
 ### Learner authentication and onboarding
 
-![Authentication screen](artifacts/w8/auth-1.jpeg)
-
 ![Login flow and access control](artifacts/w8/auth-2.jpeg)
 
 ![Secure session management](artifacts/w8/auth-3.jpeg)
