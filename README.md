@@ -158,15 +158,6 @@ cd development/source/lssn_app
 npm run start
 ```
 
-## Why investors should care
-
-This project is not a proof-of-concept. It is a complete learning platform engineered for fast expansion into creator monetization, course marketplaces, enterprise training, and interactive microlearning. The multi-interface approach and modern architecture make it a strong foundation for an MVP that can convert early adopter traction into recurring revenue.
-
-- Strong product differentiation through role-based workflows
-- Clear monetization pathways via creators and admins
-- Enterprise-ready admin controls and analytics
-- Modern stack that supports rapid iteration and deployment
-
 ## Project structure
 
 - `development/source/lssn_app` - mobile learner app built with Expo React Native
